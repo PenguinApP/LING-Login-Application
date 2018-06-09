@@ -14,7 +14,7 @@ class App extends Component {
 
     var WebStyle={
 
-      color:'#9999FF'
+      color:'#
 
     }
 
@@ -28,7 +28,7 @@ class App extends Component {
         
         </head>
 
-        <body style={WebStyle}>
+
 
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
