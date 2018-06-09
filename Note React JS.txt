@@ -1,0 +1,266 @@
+
+--- [ React JavaScript ] ----	
+
+	- React เป็น JavaScript Library ที่ถูกสร้างโดย Facebook : ไว้สร้าง User Interface
+
+	- React Features
+		- รองรับการเขียนแบบ JSX ( JavaScript Syntex Extension )
+
+
+- [ Code React JS ] -
+
+Chapter 0 : Install With cmd.exe	--------------------------------------------------
+
+	C:\Users\Kritteewut>cd Desktop
+
+	C:\Users\Kritteewut\Desktop>cd LING Program Project
+
+	C:\Users\Kritteewut\Desktop\LING Program Project>cd ling-app
+
+**	C:\Users\Kritteewut\Desktop\LING Program Project>npm install -g create-react-app	**
+
+**	C:\Users\Kritteewut\Desktop\LING Program Project>create-react-app ling-app		**
+
+	C:\Users\Kritteewut\Desktop\LING Program Project\ling-app>npm start
+
+	http://localhost:3000/
+
+	แก้ไขไฟล์ใน C:\Users\Kritteewut\Desktop\LING Program Project\ling-app\src (App.js , index.js)
+
+
+Chapter 1 : Basic Code		--------------------------------------------------
+
+[Basic Code]
+
+	import React, { Component } from 'react';
+	import logo from './logo.svg';
+	import './App.css';
+
+	class App extends Component {
+
+	** 	render() {
+
+			var mystyle={
+
+			fontSize:100,
+			color:'#FF0000'
+		
+			// ตรงนี้คือประกาศ ลักษณะ ของ Web
+
+			}
+
+	**  		return (
+	**   			<div className="App">
+        					<header className="App-header">
+          						<img src={logo} className="App-logo" alt="logo" />
+          						<h1 className="App-title">Welcome to React</h1>
+
+        					</header>
+        					<p className="App-intro">
+          						To get started, edit <code>src/App.js</code> and save to reload.
+	**        				</p>
+	**     			</div>
+	**    		);
+	  	}
+	}
+
+	export default App;	
+
+
+[Hello Taylor]
+
+	class HelloMessage extends React.Component {
+ 	 	render() {
+    			return (
+      				<div>
+        					Hello {this.props.name}
+      				</div>
+    			);
+  		}
+	}
+
+	ReactDOM.render(
+  		<HelloMessage name="Taylor" />,
+  		mountNode
+	);
+
+
+[Time Second : นับเวลาเรื่อยๆ]
+
+	class Timer extends React.Component {
+  		constructor(props) {
+    				super(props);
+    				this.state = { seconds: 0 };
+  				}
+
+  			tick() {
+    				this.setState(prevState => ({
+      				seconds: prevState.seconds + 1
+    				}));
+  			}
+
+  		componentDidMount() {
+    				this.interval = setInterval(() => this.tick(), 1000);
+  		}
+
+  		componentWillUnmount() {
+    				clearInterval(this.interval);
+  		}
+
+  		render() {
+    			return (
+      				<div>
+        				Seconds: {this.state.seconds}
+      				</div>
+    			);
+  		}
+	}
+
+	ReactDOM.render(<Timer />, mountNode);
+
+
+Chapter 2 : Style และ Expression JSX		--------------------------------------------------
+
+	import React, { Component } from 'react';
+	import logo from './logo.svg';
+	import './App.css';
+
+	class App extends Component {
+  		render() {
+
+    			var myStyle={
+
+      				fontSize:40,
+				color:'#5555FF'
+
+  			  }
+
+	    		return (
+
+	      			<div className="App">
+
+	        				<header className="App-header">
+          						<img src={logo} className="App-logo" alt="logo" />
+          
+						<h1 className="App-title" style={myStyle}>Welcome to React</h1>
+				
+					</header>
+
+				       	<p className="App-intro">
+          						To get started, edit <code>src/App.js</code> and save to reload.
+        					</p>
+      				</div>
+
+    			);
+  		}
+	}
+
+	export default App;
+
+
+Chapter 3 : Create Component	----------------------------------------------------------------------
+
+	import React, { Component } from 'react';
+	import logo from './logo.svg';
+	import './App.css';
+
+	class App extends Component {
+  		render() {
+	    		return (
+	      			<div>
+					<h1> APP </h1>
+					<Header/>
+					<Content/>
+					<Footer/>
+      				</div>
+
+    			);
+  		}
+	}
+
+	class Header extends Component {
+  		render() {
+	    		return (
+	      			<div>
+					<h1> Header </h1>
+      				</div>
+
+    			);
+  		}
+	}
+
+	class Content extends Component {
+  		render() {
+	    		return (
+	      			<div>
+					<h1> Content </h1>
+      				</div>
+
+    			);
+  		}
+	}
+
+	class Footer extends Component {
+  		render() {
+	    		return (
+	      			<div>
+					<h1> Footer </h1>
+      				</div>
+
+    			);
+  		}
+	}
+
+	export default App;
+
+
+Chapter 4 : Properties การส่งค่า จากหน้าอื่น สู่อีกหน้าหนึ่ง
+
+	import React, { Component } from 'react';
+
+	import Header from './Header';
+	import Content from './Content';
+	import Footer from './Footer';
+
+	import logo from './logo.svg';
+	import './App.css';
+
+	class App extends Component {
+  		render() {
+	    		return (
+	      			<div>
+					<h1> APP </h1>
+
+					<Header/>
+					<Content title="Course React" name="Good Boy" Price="Free"/>
+					<Footer/>
+      				</div>
+
+    			);
+  		}
+	}
+
+	export default App;
+
+ส่วนของ Content.js
+
+	import React, { Component } from 'react';
+
+	class Content extends Component {
+  		render() {
+	    		return (
+	      			<div>
+					<h1> Facebook Library </h1>
+					<p>{this.props.title}</p>
+					<p>{this.props.name}</p>
+					<p>{this.props.price}</p>
+      				</div>
+
+    			);
+  		}
+	}
+
+	export default Content;
+
+
+
